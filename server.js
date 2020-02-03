@@ -4,11 +4,11 @@ const bodyParser = require('body-parser');
 const app = express();
 const db = require('./app/config/db')
 
+
 const port = 3000;
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser({extended: true}));
 MongoClient.connect(db.url, (err, database) => {
     if (err) return console.log(err)
-    // Make sure you add the database name and not the collection name
     const db = database.db("6og")
     require('./app/routes')(app, db);
     app.listen(port, () => {

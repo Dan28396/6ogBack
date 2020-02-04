@@ -2,7 +2,9 @@ module.exports = function (app, db) {
     app.route('/orders')
         .post(function (req, res) {
             const order = {
-                metadata: req.body.metadata.jopa,
+                metadata: req.body.metadata.order,
+                description: req.body.description,
+                status: req.body.status,
             };
             db.collection('orders').insert(order, (err, result) => {
                 if (err) {

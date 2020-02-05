@@ -15,7 +15,8 @@ MongoClient.connect(db.url, (err, database) => {
     require('./app/routes')(app, db);
     https.createServer({
         key: fs.readFileSync('./encryption/private.key'),
-        cert: fs.readFileSync( './encryption/server.crt' ),
+        cert: fs.readFileSync( './encryption/certificate.crt' ),
+        ca: fs.readFileSync( './encryption/certificate_ca.crt' )
     }, app)
         .listen(3000, function () {
             console.log('Example app listening on port 3000! Go to https://localhost:3000/')

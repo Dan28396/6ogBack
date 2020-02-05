@@ -5,9 +5,13 @@ const app = express();
 const db = require('./app/config/db')
 const fs = require('fs');
 const https = require('https');
-
-
+const subdomain = require('express-subdomain');
+const router = express.Router();
 const port = 3000;
+
+app.use(subdomain('api', router));
+
+
 app.use(bodyParser({extended: true}));
 MongoClient.connect(db.url, (err, database) => {
     if (err) return console.log(err)

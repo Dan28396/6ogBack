@@ -1,23 +1,28 @@
-module.exports = function (app, db) {
-    app.route('/orders')
-        .post(function (req, res) {
-            const order = {
-                metadata: req.body.metadata.order,
-                description: req.body.description,
-                status: req.body.status,
-            };
-            db.collection('orders').insert(order, (err, result) => {
-                if (err) {
-                    res.send({'error': 'An error has occurred'});
-                } else {
-                    res.send(result.ops[0]);
-                }
-            });
-        })
-        .get(function (req, res) {
-            db.collection('orders').find({}).toArray(function(error, orders) {
-                if (error) throw error;
-                res.send(orders);
-            });
-        });
-};
+const express = require('express');
+const router = express.Router();
+const MongoClient = require('mongodb').MongoClient;
+const db = require('../config/db')
+
+
+router.post('/', async (req, res) => {
+    const orders = await loadOrdersCollection();
+    await orders.insertOne(req.body);
+    res.status(200).send();
+})
+router.get('/', async (req, res) => {
+    const orders = await loadOrdersCollection();
+    res.send(await orders.find({}).toArray());
+});
+
+
+async function loadOrdersCollection() {
+    const client = await MongoClient.connect(
+        db.url,
+        {
+            useNewUrlParser: true
+        }
+    );
+    return client.db('6og').collection('orders');
+}
+
+module.exports = router;

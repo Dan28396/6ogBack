@@ -21,7 +21,7 @@ MongoClient.connect(db.url, (err, database) => {
     const orders = require('./app/routes/index');
     app.use('/api/orders', orders);
     app.listen(port, function () {
-            console.log('Example app listening on port' + port + '! Go to https://localhost:' + port + '/')
+            console.log('Listening on port ' + port + '! Go to https://localhost:' + port + '/')
         })
 })
 

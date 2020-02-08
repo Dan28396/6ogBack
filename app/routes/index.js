@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
 })
 router.get('/', async (req, res) => {
     const orders = await loadOrdersCollection();
-    res.send(await orders.find({}).toArray());
+        res.send(await orders.find({}).toArray());
 });
 
 

@@ -3,7 +3,6 @@ const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 const app = express();
 const db = require('./app/config/db')
-const cors = require('cors');
 
 
 
@@ -12,7 +11,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
 app.use(bodyParser.text());
-app.use(cors({origin: 'https://6og.ooo'}))
 
 
 

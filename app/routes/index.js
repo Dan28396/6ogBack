@@ -6,7 +6,7 @@ const db = require('../config/db')
 
 router.post('/', async (req, res) => {
     const orders = await loadOrdersCollection();
-    await orders.insertOne(req.body);
+    await orders.findOneAndReplace({"object.id" : req.body.object.id}, req.body,{upsert: true});
     res.status(200).send();
 })
 router.get('/', async (req, res) => {

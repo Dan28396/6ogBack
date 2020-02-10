@@ -25,7 +25,7 @@ router.post('/api/yandex', async (req, res) => {
 })
 
 let corsOptions = {
-    origin: 'https://6og.ooo',
+    origin: 'https://www.6og.ooo',
 }
 
 router.get('/api/orders', cors(corsOptions), async (req, res) => {

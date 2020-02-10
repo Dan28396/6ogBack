@@ -19,7 +19,8 @@ router.post('/api/yandex', async (req, res) => {
             "name": req.body.object.metadata.name,
             "email": req.body.object.metadata.email,
             "order": JSON.parse(req.body.object.metadata.order),
-            "source": "yandex"
+            "source": "yandex",
+            "isVisible": false
         }, {upsert: true});
     res.status(200).send();
 })
@@ -45,7 +46,8 @@ router.post('/api/paypal', async (req, res) => {
             "name": req.body.order.purchase_units[0].shipping.name.full_name,
             "email": req.body.order.payer.email_address,
             "order": req.body.order.purchase_units[0].items,
-            "source": "paypal"
+            "source": "paypal",
+            "isVisible": false
         }
     );
     res.status(200).send();

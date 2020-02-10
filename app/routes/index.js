@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const db = require('../config/db')
+const cors = require('cors')
 
 
 router.post('/api/yandex', async (req, res) => {
@@ -22,7 +23,12 @@ router.post('/api/yandex', async (req, res) => {
         }, {upsert: true});
     res.status(200).send();
 })
-router.get('/api/orders', async (req, res) => {
+
+let corsOptions = {
+    origin: 'https://6og.ooo',
+}
+
+router.get('/api/orders', cors(corsOptions), async (req, res) => {
     const orders = await loadOrdersCollection();
     res.send(await orders.find({}).toArray());
 });

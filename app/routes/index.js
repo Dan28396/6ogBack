@@ -43,7 +43,7 @@ router.post('/api/paypal', async (req, res) => {
             "address": req.body.order.purchase_units[0].shipping.address.address_line_1,
             "city": req.body.order.purchase_units[0].shipping.address.admin_area_2,
             "postalCode": req.body.order.purchase_units[0].shipping.address.postal_code,
-            "name": req.body.order.payer.name.given_name + " " + req.body.order.payer.name.surname,
+            "name": req.body.order.purchase_units[0].description,
             "email": req.body.order.payer.email_address,
             "order": req.body.order.purchase_units[0].items,
             "source": "paypal",
